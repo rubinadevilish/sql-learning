@@ -1,0 +1,72 @@
+-- Project: SQL Learning Journey
+/* Functions a built in SQL code:
+    accepts an input value
+    processes it
+    returns an output value 
+Single Row Functions 'MARIA' LOWER() 'maria' Row level calculations
+    String Functions
+        Manipulation
+            CONCAT Combines multiple strings into one First Name Michael Last Name Scott CONCAT () Michael Scott
+            UPPER Converts all characters to uppercase Maria UPPER () MARIA
+            LOWER Converts all characters to lowercase MARIA LOWER () maria
+            TRIM Removes leading and trailing spaces _John John_ _John_
+            REPLACE replaces specific character with a new character
+        Calculation
+            LEN counts how many characters Maria LEN() 5    350 LEN() 3  2026-01-2023 LEN() 12
+        String Extraction
+            LEFT extracts specific number of characters from the start Maria LEFT = 2 Ma
+            RIGHT extracts specific number of characters from the end Maria Right = 2 ia
+            SUBSTRING extracts a part of string at a specified position SUBSTRING (Value, start, length)
+    Numeric Functions
+        ROUND Function 3.516 ROUND2 3.52   3.516 Round1 3.5   3.516 Round0 4
+        ABS returns the absolute (positive) value of a number, removing any negative sign
+    Date & Time Functions [How to source date time in SQL: Date column from a table, Hardcoded constant string value, GETDATE() returns current date time at moment when query is executed]
+        Part extraction
+            DAY returns the day from a date DAY (date)
+            MONTH returns the month from a date MONTH (date)
+            YEAR returns the year from a date YEAR (date)
+            DATEPART Returns a specific part of the date as a number DATEPART (part, '2025-08-20')
+            DATENAME Returns the name of specific part of the date DATENAME (part, '2025-08-20')
+            DATETRUNC Truncates the date to specific part DATETRUNC (part, '2025-08-20')
+            EOMONTH Returns the last day of the month EOMONTH ()
+        Format & Casting
+            FORMAT Changing format of date or time value from one to another. Changing how data looks FORMAT (value, format [,culture]) FORMAT (OrderDate, 'dd/MM/yyyy', 'ja-JP')
+            CONVERT changing style parameter. Changes a date or time value to a different data type. CONVERT (data_type, value [,style]) CONVERT (VARCHAR, OrderDate, '34')
+            CAST Changing data type from one to another. CAST(value AS data_type) CAST('123' AS INT) CAST('2025-08-20' AS DATE)
+        Calculations
+            DATEA  dDD Adds or subtracts a specific time interval to/from a date DATEADD(part, interval, date) DATEADD(year, 2, OrderDate) DATEADD(month, -4, OrderDate)
+            DATEDIFF Find the difference between two dates DATEDIFF(part, start_date, end_date) DATEDIFF(year, OrderDate, ShipDate)
+        Date Validation 
+            ISDATE Check if a value is a date. Returns 1 If the string value is a valid date. ISDATE(value)
+    Null Functions null means nothing, unknown. Isn't zero, empty string nor blank space
+        COALESCE Returns the first non-null value from a list COALESCE(value1, value2, value3.....)
+        NULLIF Handle the NULL before doing data aggregations. Compares two expressions returns: NULL, if they are equal. First Value, if they are not equal. NULLIG (value1, value2)
+        ISNULL Replaces 'NULL' with a specified value ISNULL(value, replacement_value) ISNULL(Shipping_Address, 'Billing_Address')
+        ISNOTNULL Returns TRUE if the value IS NOT NULL, otherwise it returns FALSE
+Multi-Row Functions 30 10 20 40 SUM() 100
+    Aggregate Functions (Basics)   COUNT (*) SUM  AVG   MAX    MIN   (Numeric in Nature, partition and order clause is optional)
+    Window Functions (Advanced) Perform calculations (e.g. aggregation) on a specific subset of data, without losing level of details of rows.
+            SYNTAX  WINDOW FUNCTION(expression)  OVER CLAUSE [Tells SQL that the function used is a window function. It defines a window or subset of data]. Apart from being empty, OVER CLAUSE Includes: 
+                PARTITION BY Divides the result set into partitions i.e Windows
+                ORDER BY sort the data in a window
+                FRAME CLAUSE Define subset of rows in window that is relevant for calculation 
+                    [ROWS/Range BETWEEN CURRENT ROW/N PRECEDING/UNBOUNDED PRECEDING AND CURRENT ROW/N FOLLOWING/UNBOUNDED FOLLOWING (can only used together with order by clause)
+                OVERALL TOTAL   SUM (Sales) OVER ()
+                TOTAL PER GROUPS    SUM (Sales) OVER (PARTTIION BY Product)
+                RUNNING TOTAL   SUM (Sales) OVER (ORDER BY Month)
+                ROLLING TOTAL   SUM (Sales) OVER (ORDER BY Month ROWS @ PRECEDING)
+        Rank Functions (Empty expression except NTILE which is numeric, partition clause is optional but order clause required)
+            ROW_NUMBER()  Assign a unique number to each in a window    ROW_NUMBER () OVER (ORDER BY Sales)
+            RANK()   Assign a rank to each row in a window with gaps   RANK () OVER (ORDER BY Sales)
+            DENSE_RANK()   Assign a rank to each row in a window, without gaps  DENSE_RANK () OVER (ORDER BY Sales)
+            CUME_DIST()   calculates the cumulative distribution of a value within a set of values  CUME_DIST () OVER (ORDER BY Sales)
+            PERCENT_RANK()    Returns the percentile ranking number of a row    PERCENT_RANK () OVER (ORDER BY Sales)
+            NTILE (n)  Divides the rows into a specified number of approximately equal groups   NTILE (2) OVER (ORDER BY Sales)
+        Value (Analytics) Functions (All data type expression, partition clause is optional but order clause required)  
+            LEAD (expr,offset, default)     Returns the value from a subsequent row     LEAD (Sales, 2,0) OVER (ORDER BY OrderDate)
+            LAG (expr, offset, default)     Returns the value from a previous row       LAG (Sales, 2, 0) OVER (ORDER BY OrderDate)
+            FIRST_VALUE (expr)              Returns the first value in a window         FIRST_VALUE (Sales) OVER (ORDER BY OrderDate)
+            LAST VALUE (expr)               Returns the last value in a window          LAST_VALUE (Sales) OVER (ORDER BY OrderDate)
+Nested Functions Function used inside another function
+    'MARIA' LEFT(2) 'MA' LOWER () 'ma' will be LOWER (LEFT ('MARIA', 2)) */
+
